@@ -62,6 +62,10 @@ def is_guess_in_word(guess, secret_word):
             return True
     return False
 
+def has_been_guessed(guess, letters_guessed):
+    return guess in letters_guessed
+
+
 def user_input(prompt):
     # the input function will display a message in the terminal
     # and wait for user input.
@@ -85,6 +89,12 @@ def game(secret_word):
             while len(guess) > 1:
                 guess = user_input('Please only enter one letter at a time: ')
 
+        has_been_guessed = has_been_guessed(guess, letters_guessed)
+        while has_been_guessed:
+            guess = user_input('You already guessed that letter, choose a different one: ')
+            has_been_guessed = has_been_guessed(guess, letters_guessed)
+
+            
         letters_guessed.append(guess)
         letters_not_guessed.remove(guess)
         if is_guess_in_word(guess, secret_word):
