@@ -74,7 +74,7 @@ def user_input(prompt):
 
 def round0(secret_word):
     length = str(len(secret_word))
-    print('Welcome to Spaceman! \n The secret word contains ' + length + ' letters \n You have ' + length + ' guesses, please only enter 1 letter per round')
+    print(f'Welcome to Spaceman! \n The secret word contains {length} letters \n You have {length} guesses, please only enter 1 letter per round')
 
 def game(secret_word):
     incorrect_guesses = len(secret_word)
@@ -85,10 +85,16 @@ def game(secret_word):
     while guessed_word != secret_word and incorrect_guesses > 0:
         print("These letters haven't been guessed yet: " + "".join(letters_not_guessed))
         guess = user_input('Enter a lowercase letter: ')
+
+        # make sure user entered exactly one letter
+        if not guess.isalpha():
+            while not guess.isalpha():
+                guess = user_input('Please enter a letter: ')
         if len(guess) > 1:
             while len(guess) > 1:
                 guess = user_input('Please only enter one letter at a time: ')
 
+        # check if user has already guessed the letter
         guessed = has_been_guessed(guess, letters_guessed)
         while guessed:
             guess = user_input('You already guessed that letter, choose a different one: ')
@@ -103,10 +109,10 @@ def game(secret_word):
         else:
             incorrect_guesses -= 1
             print('Your guess was not in the word. Please try again \n You have ' + str(incorrect_guesses) + ' guesses left \n Secret word so far: ' + guessed_word)
-        
+    return letters_guessed   
 
-def win_lose(secret_word):
-    if is_word_guessed:
+def win_lose(secret_word, letters_guessed):
+    if is_word_guessed(secret_word, letters_guessed):
         print('You won! The secret word was ' + secret_word)
     else: 
         print('You lost :( The secret word was ' + secret_word)
@@ -118,9 +124,15 @@ def spaceman(secret_word):
       secret_word (string): the secret word to guess.
     '''
     round0(secret_word)
-    game(secret_word)
-    win_lose(secret_word)
+    my_list = game(secret_word)
+    
+    win_lose(secret_word, my_list)
 
 # set secret word and start game
 secret_word = load_word()
 spaceman(secret_word)
+play_again = user_input("Would you like to play again? Y/N")
+while play_again.upper() == "Y":
+    secret_word = load_word()
+    spaceman(secret_word)
+    play_again = user_input("Would you like to play again? Y/N")
