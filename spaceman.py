@@ -69,20 +69,22 @@ def user_input(prompt):
     return user_input
 
 def round0(secret_word):
-    print("Welcome to Spaceman! \n The secret word contains " + str(len(secret_word)) + " letters \n You have 7 guesses, please only enter 1 letter per round")
+    length = str(len(secret_word))
+    print('Welcome to Spaceman! \n The secret word contains ' + length + ' letters \n You have ' + length + ' guesses, please only enter 1 letter per round")
 
 def game(secret_word):
-    incorrect_guesses = 7
+    incorrect_guesses = len(secret_word)
     letters_guessed = []
     letters_not_guessed = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
     guessed_word = get_guessed_word(secret_word, letters_guessed)
 
     while guessed_word != secret_word and incorrect_guesses > 0:
+        print("These letters haven't been guessed yet: " + "".join(letters_not_guessed))
         guess = user_input('Enter a lowercase letter: ')
         if len(guess) > 1:
             while len(guess) > 1:
                 guess = user_input('Please only enter one letter at a time: ')
-                
+
         letters_guessed.append(guess)
         letters_not_guessed.remove(guess)
         if is_guess_in_word(guess, secret_word):
@@ -91,7 +93,7 @@ def game(secret_word):
         else:
             incorrect_guesses -= 1
             print('Your guess was not in the word. Please try again \n You have ' + str(incorrect_guesses) + ' guesses left \n Secret word so far: ' + guessed_word)
-        print("These letters haven't been guessed yet: " + "".join(letters_not_guessed))
+        
 
 def win_lose(secret_word):
     if is_word_guessed:
@@ -105,27 +107,10 @@ def spaceman(secret_word):
     Args:
       secret_word (string): the secret word to guess.
     '''
-    
     round0(secret_word)
     game(secret_word)
     win_lose(secret_word)
 
-    #TODO: show the player information about the game according to the project spec
-
-    #TODO: Ask the player to guess one letter per round and check that it is only one letter
-
-    #TODO: Check if the guessed letter is in the secret or not and give the player feedback
-
-    #TODO: show the guessed word so far
-
-    #TODO: check if the game has been won or lost
-
-
-
-
-
-
-#These function calls that will start the game
-#secret_word = load_word()
-secret_word = "valentine"
+# set secret word and start game
+secret_word = load_word()
 spaceman(secret_word)
