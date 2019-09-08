@@ -74,7 +74,7 @@ def user_input(prompt):
 
 def round0(secret_word):
     length = str(len(secret_word))
-    print('Welcome to Spaceman! \n The secret word contains ' + length + ' letters \n You have ' + length + ' guesses, please only enter 1 letter per round")
+    print('Welcome to Spaceman! \n The secret word contains ' + length + ' letters \n You have ' + length + ' guesses, please only enter 1 letter per round')
 
 def game(secret_word):
     incorrect_guesses = len(secret_word)
@@ -89,10 +89,10 @@ def game(secret_word):
             while len(guess) > 1:
                 guess = user_input('Please only enter one letter at a time: ')
 
-        has_been_guessed = has_been_guessed(guess, letters_guessed)
-        while has_been_guessed:
+        guessed = has_been_guessed(guess, letters_guessed)
+        while guessed:
             guess = user_input('You already guessed that letter, choose a different one: ')
-            has_been_guessed = has_been_guessed(guess, letters_guessed)
+            guessed = has_been_guessed(guess, letters_guessed)
 
             
         letters_guessed.append(guess)
