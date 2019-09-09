@@ -27,8 +27,7 @@ Guess the word before you run out of guesses!
 - [x] Prompt  the user to play again after a game ends. If they say yes, then start a new game.
 - [x] Change the number of incorrect guesses allowed to match the length of the mystery word
 - [x] Show the user the mystery word when they lose
-- [ ] Use ASCII art to draw the spaceman with each incorrect guess
-- [ ] Sinister Spaceman: After the user guesses a correct letter, change the mystery word to be a new mystery word that is the same word length and uses the same correctly guessed letters
+
 ​
 ## How to run/setup
 Clone or download this repo, go to the directory where the downloaded file is, then type in the terminal
