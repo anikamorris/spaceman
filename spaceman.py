@@ -24,6 +24,7 @@ def is_word_guessed(secret_word, letters_guessed):
     Returns: 
         bool: True only if all the letters of secret_word are in letters_guessed, False otherwise
     '''
+    # loop through each letter of secret_word, if all letters are in letters_guessed, return True, else return False
     for i in range(len(secret_word)):
         if not (secret_word[i] in letters_guessed):
             return False
@@ -82,6 +83,7 @@ def game(secret_word):
     letters_not_guessed = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
     guessed_word = get_guessed_word(secret_word, letters_guessed)
 
+    # repeat until user guesses word or they run out of guesses
     while guessed_word != secret_word and incorrect_guesses > 0:
         print("These letters haven't been guessed yet: " + "".join(letters_not_guessed))
         guess = user_input('Enter a lowercase letter: ')
@@ -100,9 +102,10 @@ def game(secret_word):
             guess = user_input('You already guessed that letter, choose a different one: ')
             guessed = has_been_guessed(guess, letters_guessed)
 
-            
+        # add guess to letters_guessed and remove it from letters_not_guessed
         letters_guessed.append(guess)
         letters_not_guessed.remove(guess)
+
         if is_guess_in_word(guess, secret_word):
             guessed_word = get_guessed_word(secret_word, letters_guessed)
             print('Your guess appears in the word! \n Secret word so far: ' + guessed_word)
@@ -111,6 +114,7 @@ def game(secret_word):
             print('Your guess was not in the word. Please try again \n You have ' + str(incorrect_guesses) + ' guesses left \n Secret word so far: ' + guessed_word)
     return letters_guessed   
 
+# determines if user won or lost and prints corresponding statement
 def win_lose(secret_word, letters_guessed):
     if is_word_guessed(secret_word, letters_guessed):
         print('You won! The secret word was ' + secret_word)
@@ -125,7 +129,6 @@ def spaceman(secret_word):
     '''
     round0(secret_word)
     my_list = game(secret_word)
-    
     win_lose(secret_word, my_list)
 
 # set secret word and start game
