@@ -11,7 +11,7 @@ def load_word():
     words_list = f.readlines()
     f.close()
     
-    words_list = words_list[0].split(' ') #comment this line out if you use a words.txt file with each word on a new line
+    words_list = words_list[0].split(' ') 
     secret_word = random.choice(words_list)
     return secret_word
 
@@ -87,7 +87,7 @@ def game(secret_word):
     while guessed_word != secret_word and incorrect_guesses > 0:
         print("These letters haven't been guessed yet: " + "".join(letters_not_guessed))
         guess = user_input('Enter a lowercase letter: ')
-
+        guess = guess.lower()
         # make sure user entered exactly one letter
         if not guess.isalpha():
             while not guess.isalpha():
