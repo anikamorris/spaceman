@@ -64,6 +64,17 @@ def is_guess_in_word(guess, secret_word):
     return False
 
 def has_been_guessed(guess, letters_guessed):
+    '''
+    A function to check if the guessed letter has already been guessed
+    Args:
+        guess (string): The letter guessed by the player this round
+        letters_guessed (list): A list of letters that the player has 
+                                already guessed this game
+    Returns:
+        bool: True if the guess has is in the list of guessed letters,
+              False otherwise
+
+    '''
     return guess in letters_guessed
 
 
