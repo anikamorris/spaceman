@@ -50,10 +50,6 @@ class GuessWordsTest(unittest.TestCase):
         self.assertEqual(is_word_guessed('banana', ['b', 'a', 'n']), True)
         self.assertEqual(is_word_guessed('nothing', []), False)
 
-    def test_is_word_guessed_again(self):
-        self.assertEqual(is_word_guessed('apple', ['a', 'p', 'e', 'l']), False)
-
-
     def test_is_guess_in_word(self):
         self.assertEqual(is_guess_in_word('$', 'camera'), False)
         self.assertEqual(is_guess_in_word('l', 'maybe'), False)
@@ -62,8 +58,11 @@ class GuessWordsTest(unittest.TestCase):
         self.assertEqual(is_guess_in_word('f', 'flower'), True)
 
     def test_has_been_guessed(self):
-        assert has_been_guessed('b', ['m', 'q', 'r', 'l', 'o']) == False
-        assert has_been_guessed('4', ['m', 'q', 'r', 'l', 'o']) == False
+        self.assertEqual(has_been_guessed('b', ['m', 'q', 'r', 'l', 'o']), False)
+        self.assertEqual(has_been_guessed('c', ['l', 'n', 'i', 'c']), True)
+        self.assertEqual(has_been_guessed('4', ['m', 'q', 'r', 'l', 'o']), False)
+        self.assertEqual(has_been_guessed('*', ['l', 'n', 'i', 'c']), False)
+        self.assertEqual(has_been_guessed(' ', ['a', 'p', 'e', 'l']), False)
     
 if __name__ == "__main__":
     # Run the test function
